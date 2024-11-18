@@ -21,46 +21,54 @@ function addToDO(todoObj){
 
 // A function that removes an item at a given index from our todo list array. You can use splice!
 function deleteTodo(index){
-  index.splice()
+  todos.splice(index, 1)
 }
 
 
 // A function that takes in a todo object and displays it on the DOM. This is a pretty big function, so we'll walk through the different parts of it.
 const printTodo = function(todo) {
   // Use `document.createElement` to make an <li>.
-
+const newTodo = document.createElement('li')
   
   // Set its text (preferably using `.innerText`) to be our given object's text field. Check out what a todo object looks like in `todos.js` if you need to!
-
+newTodo.innerText = todo.text
 
   // Give our new li a `todo-item` class using `classList`. This will allow us to style it later if we want.
-
+newTodo.classList.add('todo-item')
 
   // Give our new li an id that is the object's id. This is so that we have a matching relationship between todo _html elements_ and their corresponding _array objects_. Now we'll be able to find the corresponding array object when they click to toggle the completeness on a DOM element.
-
+newTodo.id = todo.id
   
   // Give the li a `complete` class if the todo object indicates it was complete already. (Again, check the `todos.js` to see what the objects look like!)
-
-
+if(todo.complete === true){
+  newTodo.classList.add('complete')
+}
   // Query the todo list <ol> and store it in a variable
-
+const todoList = document.querySelector('ol')
 
   // Append the li we made to the ol as the last child using `.appendChild`. If this isn't working for you, check what is being appended to what!
-
+todoList.appendChild(newTodo)
 }
 
 
 // A function that print ALL todos. It should loop through our todos array and call the above print-one-todo function on each one.
-
+function printAll(){
+  for(let i = 0; i < todos.length; i++){
+    printTodo(todos[i])
+  }
+}
 
 
 // Now here in the global code, call the above function, so our todos array gets printed out on page load (which is when global code is run). This is the only time we're calling a function ourselves; the rest is event listeners and helper functions that run when the user interacts with the DOM!
-
+printAll()
 
 
 // A function that clears all todos from the DOM. This is a great helper function for refreshing our todos.
 // Test it in the console and see if your list disappears!
-
+function clearToDos(){
+  const todoList = document.querySelector('ol')
+  todoList.innerHTML = ""
+}
 
 
 // A function that refreshes our page by calling each of the two above functions. Since printing all todos onto the DOM is based on our todos array, if we make a change to our todos array, we can simply call this function, which will make our DOM match our todos array by simply clearing the page and repopulating it according to our todos' new state.
