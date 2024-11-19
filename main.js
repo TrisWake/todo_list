@@ -83,18 +83,23 @@ Let's wire it all together. Add an event listener for the add todo button that w
 4. Pass the object as well to your adding todos function to put it on the DOM.
 5. Stretch goal: remove all text from the input box. Try adding multiple todos without this first, you'll see why we should do it!
 */
-addToDO.addEventListener('click', ()=>{
+document.querySelector('button').addEventListener('click', ()=>{
   const inputBox = document.querySelector('.todo-input')
-  const todoText = inputBox.value;
+  const todoText = inputBox.value; //value is for the 
     if(todoText){
       const todoObj = {
         text: todoText,
         complete: false,
         priority: 2,
+        id: todos.length
       }
-      inputBox.value = ''
+      addToDO(todoObj)
     }
+    clearToDos()
+    printAll()
+    inputBox.value = ""
 })
+
 
 
 
